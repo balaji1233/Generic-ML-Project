@@ -10,30 +10,23 @@ class PredictPipeline:
 
     def predict(self,features):
         try:
-            # model_path=os.path.join("artifacts","model.pkl")
-            # preprocessor_path=os.path.join('artifacts','preprocessor.pkl')
-            # print("Before Loading")
-            # model=load_object(file_path=model_path)
-            # preprocessor=load_object(file_path=preprocessor_path)
-            # print("After Loading")
-            # data_scaled=preprocessor.transform(features)
-            # preds=model.predict(data_scaled)
-            # return preds
-            model_path='artifacts\model.pkl'
-            preprocessor_path='artifacts\preprocessor.pkl'
-            model =load_object(file_path=model_path)
+            model_path=os.path.join("artifacts","model.pkl")
+            preprocessor_path=os.path.join('artifacts','preprocessor.pkl')
+            print("Before Loading")
+            model=load_object(file_path=model_path)
             preprocessor=load_object(file_path=preprocessor_path)
+            print("After Loading")
             data_scaled=preprocessor.transform(features)
             preds=model.predict(data_scaled)
             return preds
-            
-            
         
         except Exception as e:
             raise CustomException(e,sys)
 
+
+
 class CustomData:
-    def __init__(self,
+    def __init__(  self,
         gender: str,
         race_ethnicity: str,
         parental_level_of_education,
@@ -41,7 +34,6 @@ class CustomData:
         test_preparation_course: str,
         reading_score: int,
         writing_score: int):
-        
 
         self.gender = gender
 
@@ -57,8 +49,7 @@ class CustomData:
 
         self.writing_score = writing_score
 
-
-def get_data_as_data_frame(self):
+    def get_data_as_data_frame(self):
         try:
             custom_data_input_dict = {
                 "gender": [self.gender],
@@ -74,5 +65,3 @@ def get_data_as_data_frame(self):
 
         except Exception as e:
             raise CustomException(e, sys)
-
-    
